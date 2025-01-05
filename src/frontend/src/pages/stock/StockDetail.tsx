@@ -192,6 +192,13 @@ export default function StockDetail() {
         name: 'batch',
         label: t`Batch Code`,
         hidden: !stockitem.batch
+      },
+      {
+        type: 'text',
+        name: 'barcode_data',
+        label: t`Barcode`,
+        icon: 'barcode',
+        hidden: !stockitem.barcode_data
       }
     ];
 
@@ -680,7 +687,7 @@ export default function StockDetail() {
       <BarcodeActionDropdown
         model={ModelType.stockitem}
         pk={stockitem.pk}
-        hash={stockitem?.barcode_hash}
+        data={stockitem?.barcode_data}
         perm={user.hasChangeRole(UserRoles.stock)}
       />,
       <PrintingActions

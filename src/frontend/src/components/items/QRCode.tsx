@@ -76,6 +76,10 @@ export const InvenTreeQRCode = ({
   const { data } = useQuery({
     queryKey: ['qr-code', mdl_prop.model, mdl_prop.pk],
     queryFn: async () => {
+      if (mdl_prop.data) {
+        return mdl_prop.data;
+      }
+
       const res = await api.post(apiUrl(ApiEndpoints.barcode_generate), {
         model: mdl_prop.model,
         pk: mdl_prop.pk
@@ -99,12 +103,9 @@ export const InvenTreeQRCode = ({
     <Stack>
       <Divider />
 
-      {mdl_prop.hash ? (
+      {mdl_prop.data ? (
         <Alert variant='outline' color='red' title={t`Custom barcode`}>
-          <Trans>
-            A custom barcode is registered for this item. The shown code is not
-            that custom barcode.
-          </Trans>
+          <Trans>A custom barcode is registered for this item.</Trans>
         </Alert>
       ) : null}
 

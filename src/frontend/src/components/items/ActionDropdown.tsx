@@ -144,18 +144,18 @@ export function OptionsActionDropdown({
 export function BarcodeActionDropdown({
   model,
   pk,
-  hash = null,
+  data = null,
   actions = [],
   perm: permission = true
 }: Readonly<{
   model: ModelType;
   pk: number;
-  hash?: boolean | null;
+  data?: string | null;
   actions?: ActionDropdownItem[];
   perm?: boolean;
 }>) {
-  const hidden = hash === null;
-  const prop = { model, pk, hash };
+  const hidden = data === null;
+  const prop = { model, pk, data };
   return (
     <ActionDropdown
       tooltip={t`Barcode Actions`}
@@ -169,7 +169,7 @@ export function BarcodeActionDropdown({
           ChildItem: InvenTreeQRCode
         }),
         GeneralBarcodeAction({
-          hidden: hidden || hash || !permission,
+          hidden: hidden || !!data || !permission,
           mdl_prop: prop,
           title: t`Link Barcode`,
           icon: <IconLink />,
@@ -177,7 +177,7 @@ export function BarcodeActionDropdown({
           ChildItem: QRCodeLink
         }),
         GeneralBarcodeAction({
-          hidden: hidden || !hash || !permission,
+          hidden: hidden || !data || !permission,
           mdl_prop: prop,
           title: t`Unlink Barcode`,
           icon: <IconUnlink />,
@@ -193,7 +193,7 @@ export function BarcodeActionDropdown({
 export type QrCodeType = {
   model: ModelType;
   pk: number;
-  hash?: boolean | null;
+  data?: string | null;
 };
 
 function GeneralBarcodeAction({

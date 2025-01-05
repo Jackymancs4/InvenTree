@@ -383,6 +383,7 @@ class StockItemSerializer(
             'SKU',
             'MPN',
             'barcode_hash',
+            'barcode_data',
             'updated',
             'stocktake_date',
             'purchase_price',
@@ -413,6 +414,7 @@ class StockItemSerializer(
         read_only_fields = [
             'allocated',
             'barcode_hash',
+            'barcode_data',
             'stocktake_date',
             'stocktake_user',
             'updated',
